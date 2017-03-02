@@ -34,7 +34,7 @@ CREATE TABLE Workout_Program(
 CREATE TABLE Exercise(
   eid INTEGER PRIMARY KEY,
   ename VARCHAR(30),
-  cal_expend_per_lb INTEGER NOT NULL
+  cal_expend_per_lb DOUBLE NOT NULL
 )
 
 CREATE TABLE Strength_Exercise(
