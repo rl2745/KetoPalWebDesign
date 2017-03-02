@@ -28,13 +28,13 @@ CREATE TABLE Diet(
 CREATE TABLE Workout_Program(
   wid INTEGER PRIMARY KEY,
   wname VARCHAR(20) NOT NULL,
-  total_cal_expend INTEGER
+  total_cal_expend_per_lb INTEGER
 )
 
 CREATE TABLE Exercise(
   eid INTEGER PRIMARY KEY,
   ename VARCHAR(30),
-  cal_expend INTEGER NOT NULL
+  cal_expend_per_lb INTEGER NOT NULL
 )
 
 CREATE TABLE Strength_Exercise(
