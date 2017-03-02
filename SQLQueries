@@ -1,0 +1,22 @@
+Three Interesting Queries for the DB
+
+1) Name all the people who are over 200 pounds and are not in a workout program
+
+SELECT P.pname
+FROM Person P
+WHERE P.weight > 200 AND P.wid = NULL
+
+
+2)
+
+
+
+
+
+
+3)
+
+
+
+
+
