@@ -6,8 +6,11 @@ CREATE TABLE Person(
   gender CHAR,
   dob DATE,
   weight REAL,
-  height INTEGER
-)
+  height INTEGER,
+  did INTEGER FOREIGN KEY REFERENCES Diet,
+  FOREIGN KEY(did) REFERENCES Diet,
+  FOREIGN KEY(wid) REFERENCES Workout_Program
+);
 
 CREATE TABLE Food(
   fid INTEGER PRIMARY KEY,
@@ -17,38 +20,38 @@ CREATE TABLE Food(
   proteins INTEGER,
   carbs INTEGER,
   fats INTEGER
-)
+);
 
 CREATE TABLE Diet(
   did INTEGER PRIMARY KEY,
   dname VARCHAR(20) NOT NULL,
   calorie_total INTEGER
-)
+);
 
 CREATE TABLE Workout_Program(
   wid INTEGER PRIMARY KEY,
   wname VARCHAR(20) NOT NULL,
   total_cal_expend_per_lb INTEGER
-)
+);
 
 CREATE TABLE Exercise(
   eid INTEGER PRIMARY KEY,
   ename VARCHAR(30),
   cal_expend_per_lb DOUBLE NOT NULL
-)
+);
 
 CREATE TABLE Strength_Exercise(
   eid INTEGER PRIMARY KEY REFERENCES Exercise(eid),
   sets INTEGER,
   reps INTEGER,
   weight INTEGER
-)
+);
 
 CREATE TABLE Cardio_Exercise(
   eid INTERGER PRIMARY KEY REFERENCES Exercise(eid),
   duration INTEGER,
   speed INTEGER
-)
+);
 
 CREATE TABLE Competition(
   cid INTEGER PRIMARY KEY,
@@ -56,48 +59,31 @@ CREATE TABLE Competition(
   start DATE,
   stop DATE,
   win_condition INTEGER
-)
+);
 
 --Relationships
-CREATE TABLE Consists_Of(
+CREATE TABLE Diet(
   did INTEGER,
   fid INTEGER,
+  dname VARCHAR(20) NOT NULL,
   PRIMARY KEY(did, fid),
   FOREIGN KEY(did) REFERENCES Diet
     ON DELETE CASCADE,
   FOREIGN KEY(fid) REFERENCES Food
     ON UPDATE CASCADE
-)
+);
 
-CREATE TABLE Consumes(
-  email VARCHAR(50),
-  did INTEGER,
-  PRIMARY KEY(email),
-  FOREIGN KEY(email) REFERENCES Person
-    ON DELETE CASCADE,
-  FOREIGN KEY(did) REFERENCES Diet
-)
-
-CREATE TABLE Follow(
-  email VARCHAR(50),
-  wid INTEGER,
-  PRIMARY KEY(email),
-  FOREIGN KEY(email) REFERENCES Person
-    ON DELETE CASCADE,
-  FOREIGN KEY(wid) REFERENCES Workout_Program
-    ON UPDATE CASCADE
-)
-
-CREATE TABLE Uses(
+CREATE TABLE Workout_Program(
   wid INTEGER,
   eid INTEGER,
+  wname VARCHAR(20) NOT NULL,
   PRIMARY KEY(wid,ename),
   FOREIGN KEY(wid) REFERENCES Workout_Program
     ON DELETE CASCADE
     ON UPDATE CASCADE,
   FOREIGN KEY(eid) REFERENCES Exercise
     ON UPDATE CASCADE
-)
+);
 
 CREATE TABLE Participates(
   email VARCHAR(50),
@@ -108,4 +94,4 @@ CREATE TABLE Participates(
   FOREIGN KEY(email) REFERENCES Person
     ON DELETE CASCADE,
   FOREIGN KEY(cid) REFERENCES Competition
-)
+);
