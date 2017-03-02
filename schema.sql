@@ -47,7 +47,7 @@ CREATE TABLE Strength_Exercise(
 CREATE TABLE Cardio_Exercise(
   eid INTERGER PRIMARY KEY REFERENCES Exercise(eid),
   duration INTEGER,
-  avg_hr INTEGER
+  speed INTEGER
 )
 
 CREATE TABLE Competition(
