@@ -7,9 +7,8 @@ CREATE TABLE Person(
   dob DATE,
   weight REAL,
   height INTEGER,
-  did INTEGER FOREIGN KEY REFERENCES Diet,
-  FOREIGN KEY(did) REFERENCES Diet,
-  FOREIGN KEY(wid) REFERENCES Workout_Program
+  did INTEGER REFERENCES Diet NOT NULL,
+  wid INTEGER REFERENCES Workout_Program
 );
 
 CREATE TABLE Food(
@@ -21,23 +20,20 @@ CREATE TABLE Food(
   carbs INTEGER,
   fats INTEGER
 );
-
 CREATE TABLE Diet(
-  did INTEGER PRIMARY KEY,
-  dname VARCHAR(20) NOT NULL,
-  calorie_total INTEGER
+	did INTEGER PRIMARY KEY,
+	dname VARCHAR(20) NOT NULL
 );
 
 CREATE TABLE Workout_Program(
-  wid INTEGER PRIMARY KEY,
-  wname VARCHAR(20) NOT NULL,
-  total_cal_expend_per_lb INTEGER
+	wid INTEGER PRIMARY KEY,
+	wname VARCHAR(20) NOT NULL
 );
 
 CREATE TABLE Exercise(
   eid INTEGER PRIMARY KEY,
   ename VARCHAR(30),
-  cal_expend_per_lb DOUBLE NOT NULL
+  cal_expend_per_lb REAL NOT NULL
 );
 
 CREATE TABLE Strength_Exercise(
@@ -48,7 +44,7 @@ CREATE TABLE Strength_Exercise(
 );
 
 CREATE TABLE Cardio_Exercise(
-  eid INTERGER PRIMARY KEY REFERENCES Exercise(eid),
+  eid INTEGER PRIMARY KEY REFERENCES Exercise(eid),
   duration INTEGER,
   speed INTEGER
 );
@@ -61,26 +57,24 @@ CREATE TABLE Competition(
   win_condition INTEGER
 );
 
---Relationships
-CREATE TABLE Diet(
+
+CREATE TABLE Consists_Of(
   did INTEGER,
   fid INTEGER,
-  dname VARCHAR(20) NOT NULL,
   PRIMARY KEY(did, fid),
   FOREIGN KEY(did) REFERENCES Diet
-    ON DELETE CASCADE,
+	ON DELETE CASCADE,
   FOREIGN KEY(fid) REFERENCES Food
     ON UPDATE CASCADE
 );
 
-CREATE TABLE Workout_Program(
+CREATE TABLE Uses(
   wid INTEGER,
   eid INTEGER,
-  wname VARCHAR(20) NOT NULL,
-  PRIMARY KEY(wid,ename),
+  PRIMARY KEY(wid,eid),
   FOREIGN KEY(wid) REFERENCES Workout_Program
-    ON DELETE CASCADE
-    ON UPDATE CASCADE,
+  	ON DELETE CASCADE
+  	ON UPDATE CASCADE,
   FOREIGN KEY(eid) REFERENCES Exercise
     ON UPDATE CASCADE
 );
