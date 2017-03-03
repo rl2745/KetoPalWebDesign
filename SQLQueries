@@ -7,13 +7,11 @@ FROM Person P
 WHERE P.weight > 200 AND P.wid = NULL
 
 
-2) Which diet has the greatest amount of calories?
-
- 
+2) Which diet has the greatest amount of calories, and how much?
 
 
 
-3) Who burns the most calories through their workout program?
+3) Who burns the most calories through their workout program, which program, and how much?
 
 
 
