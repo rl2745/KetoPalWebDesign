@@ -1,0 +1,1 @@
+CHECK email LIKE ('_@_.com')
