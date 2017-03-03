@@ -1,1 +1,49 @@
+For Person Table:
+
 CHECK email LIKE ('_@_.com')
+
+CHECK DOB < Today's Date AND DOB > 1900?
+
+CHECK Gender = 'M' OR 'F'
+
+CHECK weight > 0
+
+CHECK height > 0
+
+For Food Table:
+
+CHECK calories > 0
+
+CHECK serving_size > 0
+
+CHECK proteins > 0
+
+CHECK fats > 0
+
+CHECK carbs > 0
+
+For Excercise Table:
+
+CHECK cal_expend_per_lb > 0
+
+For Strength Excercise Table:
+
+CHECK sets > 0
+
+CHECK reps > 0
+
+CHECK weight > 0
+
+For Cardio Excercise Table:
+
+CHECK speed > 0
+
+For Competition Table:
+
+CHECK win_condition > 0
+
+CHECK start < stop
+
+For Participates Table:
+
+CHECK date_created < start_date
