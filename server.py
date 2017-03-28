@@ -162,16 +162,10 @@ def index():
 
 @app.route('/foods')
 def foods():
-  cursor =
-  cursor = g.conn.execute("SELECT * FROM food WHERE fname='Almonds'")
-  result = cursor.fetchone()
-  cursor.close()
-  context = dict(
-    name = result['fname'],
-    cal=result['calories'],
-    protein=result['proteins'],
-    carb=result['carbs'],
-    fat=result['fats'])
+  names = g.conn.execute("SELECT fname FROM food").fetchall()
+  name = names[0][0]
+  food = g.conn.execute(text("SELECT * FROM food WHERE fname= :nm "),nm=name).fetchone()
+  context = dict(names=names, food=food)
 
 
 
@@ -254,9 +248,9 @@ def add():
 @app.route('/getUserData', methods=['GET'])
 def getUserData():
   #print request.args
-  userProfile = "Jacob Fitzgerald"
-  #userProfile = request.form['userDropDown']
-  userData = g.conn.execute("SELECT * FROM Person WHERE pname = ( :up )", up=userProfile)
+  #userProfile = "Jacob Fitzgerald"
+  userProfile = request.form['userDropDown']
+  userData = g.conn.execute(text("SELECT * FROM Person WHERE pname = :up "), up=userProfile)
   return redirect('/userProfile')
 
 @app.route('/login')
