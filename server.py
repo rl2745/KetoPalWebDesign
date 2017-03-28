@@ -179,7 +179,7 @@ def excercises():
 def competitions():
   return render_template("competitions.html")
 
-@app.route('/userProfile')
+@app.route('/userProfile', methods=['GET', 'POST'])
 def userProfile():
   """
   request is a special object that Flask provides to access web request information:
@@ -244,6 +244,14 @@ def add():
   g.conn.execute(text("INSERT INTO test(name) VALUES ( :nm )"),nm=name)
   return redirect('/')
 
+# Example of getting table data from the database
+@app.route('/getUserData', methods=['GET'])
+def getUserData():
+  #print request.args
+  userProfile = "Jacob Fitzgerald"
+  #userProfile = request.form['userDropDown']
+  userData = g.conn.execute("SELECT * FROM Person WHERE pname = ( :up )", up=userProfile)
+  return redirect('/userProfile')
 
 @app.route('/login')
 def login():

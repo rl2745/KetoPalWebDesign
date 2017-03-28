@@ -13,17 +13,19 @@
 
   <p>Select User</p>
   
-  <select name="userDropdown">
-  {% for p in usersList %}
-    <option value= "{{p.pname}}">{{p}}</option>
-  {% endfor %}
-  </select>
+  <form method="GET" action="/getUserData">
+    <select name="userDropDown">
+    {% for p in usersList %}
+      <option value= "{{p.pname}}">{{p}}</option>
+    {% endfor %}
+    </select>
 
-  <td>
-    <input class="button1" type="submit" value="Select">
-  </td>
+    <td>
+      <input class="button1" type="submit" value="Select">
+    </td>
+  </form>
   
-  
+  <div> {{userData}} </div>
 
 </body>
 
