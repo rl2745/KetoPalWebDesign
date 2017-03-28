@@ -162,12 +162,17 @@ def index():
 
 @app.route('/foods')
 def foods():
-  cursor = g.conn.execute("SELECT fname FROM food WHERE fname='Almonds'")
-  names = []
-  for result in cursor:
-    names.append(result['fname'])  # can also be accessed using result[0]
+  cursor = g.conn.execute("SELECT * FROM food WHERE fname='Almonds'")
+  result = cursor.fetchone()
   cursor.close()
-  context = dict(data = names)
+  context = dict(
+    name = result['fname'],
+    cal=result['calories'],
+    protein=result['proteins'],
+    carb=result['carbs'],
+    fat=result['fats'])
+
+
 
   return render_template("foods.html", **context)
 
