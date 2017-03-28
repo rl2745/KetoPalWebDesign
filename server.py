@@ -46,12 +46,6 @@ engine = create_engine(DATABASEURI)
 # Example of running queries in your database
 # Note that this will probably not work if you already have a table named 'test' in your database, containing meaningful data. This is only an example showing you how to run queries in your database using SQLAlchemy.
 #
-engine.execute("""CREATE TABLE IF NOT EXISTS test (
-  id serial,
-  name text
-);""")
-engine.execute("""INSERT INTO test(name) VALUES ('grace hopper'), ('alan turing'), ('ada lovelace');""")
-
 
 @app.before_request
 def before_request():
@@ -168,7 +162,14 @@ def index():
 
 @app.route('/foods')
 def foods():
-  return render_template("foods.html")
+  cursor = g.conn.execute("SELECT fname FROM food WHERE fname='Almonds'")
+  names = []
+  for result in cursor:
+    names.append(result['fname'])  # can also be accessed using result[0]
+  cursor.close()
+  context = dict(data = names)
+
+  return render_template("foods.html", **context)
 
 
 # Example of adding new data to the database

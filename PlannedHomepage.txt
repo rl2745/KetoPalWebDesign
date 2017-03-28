@@ -7,7 +7,7 @@ SHOW DATA
 
 View Foods --> new page
 
-View Excercises --> new page
+View Exercises --> new page
 
 View Competitions --> new page
 
