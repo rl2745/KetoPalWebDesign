@@ -162,6 +162,7 @@ def index():
 
 @app.route('/foods')
 def foods():
+  cursor =
   cursor = g.conn.execute("SELECT * FROM food WHERE fname='Almonds'")
   result = cursor.fetchone()
   cursor.close()
@@ -176,9 +177,9 @@ def foods():
 
   return render_template("foods.html", **context)
 
-@app.route('/excercises')
+@app.route('/exercises')
 def excercises():
-  return render_template("excercises.html")
+  return render_template("exercises.html")
 
 @app.route('/competitions')
 def competitions():
