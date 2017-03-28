@@ -1,0 +1,20 @@
+Homepage
+
+KETOPAL
+
+SHOW DATA 
+
+
+View Foods --> new page
+
+View Excercises --> new page
+
+View Competitions --> new page
+
+Create Diet 
+
+Create Workout Program
+
+Create Competition
+
+View User and associated diet, workout program, competition, etc.
