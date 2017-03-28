@@ -170,6 +170,19 @@ def index():
 def foods():
   return render_template("foods.html")
 
+@app.route('/excercises')
+def excercises():
+  return render_template("excercises.html")
+
+@app.route('/competitions')
+def competitions():
+  return render_template("competitions.html")
+
+@app.route('/userProfile')
+def userProfile():
+  return render_template("userProfile.html")
+
+
 
 # Example of adding new data to the database
 @app.route('/add', methods=['POST'])
