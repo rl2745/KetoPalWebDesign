@@ -9,6 +9,20 @@
 
 <body>
   <h1>User Profile</h1>
+
+
+  <p>Select User</p>
+  
+  <select name="userDropdown">
+  {% for p in usersList %}
+    <option value= "{{p.pname}}">{{p}}</option>
+  {% endfor %}
+  </select>
+
+  <td>
+    <input class="button1" type="submit" value="Select">
+  </td>
+  
   
 
 </body>
