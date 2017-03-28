@@ -9,18 +9,21 @@
 
 <body>
   <h1>KetoPal Foods</h1>
-  <div>
-    <div>{{food.fname}}</div>
-  </div>
 
+<form name="userDropdown" action="/foods" method='POST'>
   <select name="userDropdown">
   {% for n in names %}
     <option value= "{{n.fname}}">{{n.fname}}</option>
   {% endfor %}
   </select>
-
+  <button type="submit">Go</button>
+</form>
 <table id="nutrition-facts">
 
+  <div>
+    <div>{{food.fname}}</div>
+  </div>
+  
 	<colgroup>
 		<col class="col-1">
 		<col class="col-2">

@@ -160,14 +160,14 @@ def index():
 # def another():
 #   return render_template("another.html")
 
-@app.route('/foods')
+@app.route('/foods', methods=['GET','POST'])
 def foods():
   names = g.conn.execute("SELECT fname FROM food").fetchall()
   name = names[0][0]
+  if request.method == 'POST':
+    name = request.form['userDropdown']
   food = g.conn.execute(text("SELECT * FROM food WHERE fname= :nm "),nm=name).fetchone()
   context = dict(names=names, food=food)
-
-
 
   return render_template("foods.html", **context)
 
