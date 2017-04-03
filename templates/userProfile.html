@@ -12,26 +12,6 @@
 
 
   <p>Select User</p>
- <!-- 
-  <form method="GET" action="/getUserData">
-    <select name="userDropDown">
-    {% for p in usersList %}
-      <option value= "{{p.pname}}">{{p}}</option>
-    {% endfor %}
-    </select>
-
-    <td>
-      <input class="button1" type="submit" value="Select">
-    </td>
-  </form>
-  
-  <div> {{userData}} </div>
-
-</body>
-
-
-</html>
--->
 
 <form name="userDropdown" action="/userProfile" method='POST'>
   <select name="userDropdown">
@@ -44,10 +24,9 @@
 <table id="user-data">
 
   <div>
-    <div>{{person}}</div>
+    <div>{{person.pname}}</div>
   </div>
   
-  <!--
   <colgroup>
     <col class="col-1">
     <col class="col-2">
@@ -55,27 +34,42 @@
 
   <tbody>
     <tr>
-      <td class="col-1">Calories</td>
-      <td class="col-2">{{food.calories}}</td>
+      <td class="col-1">Email</td>
+      <td class="col-2">{{person.email}}</td>
     </tr>
     <tr>
-      <td class="col-1">Total Fat</td>
-      <td class="col-2">{{food.fats}}g</td>
-    </tr>
-  
-    <tr>
-      <td class="col-1">Total Carbs</td>
-      <td class="col-2">{{food.carbs}}g</td>
+      <td class="col-1">Gender</td>
+      <td class="col-2">{{person.gender}}</td>
     </tr>
   
     <tr>
-      <td class="col-1">Protein</td>
-      <td class="col-2">{{food.proteins}}g</td>
+      <td class="col-1">Date of Birth</td>
+      <td class="col-2">{{person.dob}}</td>
+    </tr>
+  
+    <tr>
+      <td class="col-1">Weight</td>
+      <td class="col-2">{{person.weight}} lbs</td>
+    </tr>
+    <tr>
+      <td class="col-1">Height</td>
+      <td class="col-2">{{person.height}} in</td>
+    </tr>
+    <tr>
+      <td class="col-1">Competition</td>
+      <td class="col-2">{{person.cname}}</td>
+    </tr>
+    <tr>
+      <td class="col-1">Workout Program</td>
+      <td class="col-2">{{person.wname}}</td>
+    </tr>
+    <tr>
+      <td class="col-1">Diet</td>
+      <td class="col-2">{{person.dname}}</td>
     </tr>
 
   
   </tbody>
-  -->
 
 </table>
 
