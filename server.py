@@ -172,7 +172,7 @@ def foods():
   return render_template("foods.html", **context)
 
 @app.route('/exercises')
-def excercises():
+def exercises():
   return render_template("exercises.html")
 
 @app.route('/competitions')
