@@ -12,7 +12,7 @@
 
 
   <p>Select User</p>
-  
+ <!-- 
   <form method="GET" action="/getUserData">
     <select name="userDropDown">
     {% for p in usersList %}
@@ -28,6 +28,59 @@
   <div> {{userData}} </div>
 
 </body>
+
+
+</html>
+-->
+
+<form name="userDropdown" action="/userProfile" method='POST'>
+  <select name="userDropdown">
+  {% for u in users %}
+    <option value= "{{u.pname}}">{{u.pname}}</option>
+  {% endfor %}
+  </select>
+  <button type="submit">Go</button>
+</form>
+<table id="user-data">
+
+  <div>
+    <div>{{person}}</div>
+  </div>
+  
+  <!--
+  <colgroup>
+    <col class="col-1">
+    <col class="col-2">
+  </colgroup>
+
+  <tbody>
+    <tr>
+      <td class="col-1">Calories</td>
+      <td class="col-2">{{food.calories}}</td>
+    </tr>
+    <tr>
+      <td class="col-1">Total Fat</td>
+      <td class="col-2">{{food.fats}}g</td>
+    </tr>
+  
+    <tr>
+      <td class="col-1">Total Carbs</td>
+      <td class="col-2">{{food.carbs}}g</td>
+    </tr>
+  
+    <tr>
+      <td class="col-1">Protein</td>
+      <td class="col-2">{{food.proteins}}g</td>
+    </tr>
+
+  
+  </tbody>
+  -->
+
+</table>
+
+
+  </body>
 
 
 </html>
