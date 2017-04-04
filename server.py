@@ -187,9 +187,9 @@ def diets():
   name = names[0][0]
   if request.method == 'POST':
     name = request.form['userDropdown']
-  diet = g.conn.execute(text("SELECT fname FROM diet NATURAL JOIN consists_of NATURAL JOIN food WHERE dname = :nm "),nm=name).fetchall()
+  diet = g.conn.execute(text("SELECT fname, calories FROM diet NATURAL JOIN consists_of NATURAL JOIN food WHERE dname = :nm "),nm=name).fetchall()
   calories = g.conn.execute(text("SELECT SUM(calories) AS num FROM diet NATURAL JOIN consists_of NATURAL JOIN food GROUP BY dname HAVING dname = :nm "),nm=name).fetchone()
-  context = dict(names=names, diet = diet,calories = calories)
+  context = dict(names=names, diet = diet, calories = calories)
   return render_template("diets.html", **context)
 
 @app.route('/competitions', methods=['GET','POST'])
