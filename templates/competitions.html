@@ -9,9 +9,71 @@
 
 <body>
   <h1>Competitions</h1>
-  
 
-</body>
+<form name="userDropdown" action="/competitions" method='POST'>
+  <select name="userDropdown">
+  {% for c in comps %}
+    <option value= "{{c.cname}}">{{c.cname}}</option>
+  {% endfor %}
+  </select>
+  <button type="submit">Go</button>
+</form>
+
+<table id="competition-facts">
+
+  <div>
+    <div>{{competition.cname}}</div>
+  </div>
+  
+	<colgroup>
+		<col class="col-1">
+		<col class="col-2">
+	</colgroup>
+
+	<tbody>
+		<tr>
+			<td class="col-1">Start Date</td>
+			<td class="col-2">{{competition.start}}</td>
+		</tr>
+		<tr>
+			<td class="col-1">Stop Date</td>
+			<td class="col-2">{{competition.stop}}</td>
+		</tr>
+		
+	</tbody>
+
+</table>
+		
+
+<br></br>
+
+<table id="competitors">
+
+	<colgroup>
+		<col class="col-1">
+		<col class="col-2">
+	</colgroup>
+
+		<tr>
+			<td class="col-1">Competitors</td>
+			<td class="col-2">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Weight Loss Necessary to Win Competition</td>
+		</tr>
+	
+		{% for c in competitorsCursor %}
+
+		<tr>
+			<td class="col-1">{{c.pname}}</td>
+			<td class="col-2">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-{{c.win_condition}}lbs</td>
+		</tr>
+		{% endfor %}
+	
+	</tbody>
+
+</table>
+
+<p><a href="index">Back to Homepage</a></p>
+
+  </body>
 
 
 </html>

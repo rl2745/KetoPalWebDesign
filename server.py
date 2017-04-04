@@ -175,9 +175,17 @@ def foods():
 def exercises():
   return render_template("exercises.html")
 
-@app.route('/competitions')
+@app.route('/competitions', methods=['GET','POST'])
 def competitions():
-  return render_template("competitions.html")
+  comps = g.conn.execute("SELECT DISTINCT cname FROM competition").fetchall()
+  comp = comps[0][0]
+  if request.method == 'POST':
+    comp = request.form['userDropdown']
+  competition = g.conn.execute(text("SELECT * FROM ((SELECT C.cid, C.win_condition, P.email, C.cname, C.start, C.stop FROM competition C JOIN participates P ON C.cid=P.cid) T1 NATURAL JOIN person) WHERE cname= :cp "),cp=comp).fetchone()
+  competitorsCursor = g.conn.execute(text("SELECT * FROM ((SELECT C.cid, C.win_condition, P.email, C.cname, C.start, C.stop FROM competition C JOIN participates P ON C.cid=P.cid) T1 NATURAL JOIN person) WHERE cname= :cp "),cp=comp).fetchall()
+  context = dict(comps=comps, competition=competition)
+
+  return render_template("competitions.html", **context)
 
 @app.route('/userProfile', methods=['GET', 'POST'])
 def userProfile():
