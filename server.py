@@ -200,7 +200,7 @@ def competitions():
     comp = request.form['userDropdown']
   competition = g.conn.execute(text("SELECT * FROM ((SELECT C.cid, C.win_condition, P.email, C.cname, C.start, C.stop FROM competition C JOIN participates P ON C.cid=P.cid) T1 NATURAL JOIN person) WHERE cname= :cp "),cp=comp).fetchone()
   competitorsCursor = g.conn.execute(text("SELECT * FROM ((SELECT C.cid, C.win_condition, P.email, C.cname, C.start, C.stop FROM competition C JOIN participates P ON C.cid=P.cid) T1 NATURAL JOIN person) WHERE cname= :cp "),cp=comp).fetchall()
-  context = dict(comps=comps, competition=competition)
+  context = dict(comps=comps, competition=competition, competitorsCursor=competitorsCursor)
 
   return render_template("competitions.html", **context)
 
