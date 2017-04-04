@@ -202,7 +202,7 @@ def userProfile():
   user = users[0][0]
   if request.method == 'POST':
     user = request.form['userDropdown']
-  person = g.conn.execute(text("SELECT * FROM person WHERE pname= :up "),up=userProfile).fetchone()
+  person = g.conn.execute(text("SELECT * FROM (((participates P JOIN competition C ON P.cid=C.cid) T1 JOIN (person P JOIN diet D ON P.did=D.did) T2 ON T1.email=T2.email) T3 LEFT OUTER JOIN workout_program W ON T3.wid=W.wid) WHERE pname= :up "),up=user).fetchone()
   context = dict(users=users, person=person)
 
 
