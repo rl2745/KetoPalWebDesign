@@ -171,9 +171,26 @@ def foods():
 
   return render_template("foods.html", **context)
 
-@app.route('/exercises')
+@app.route('/exercises', methods=['GET','POST'])
 def exercises():
-  return render_template("exercises.html")
+  names = g.conn.execute("SELECT ename FROM exercise").fetchall()
+  name = names[0][0]
+  if request.method == 'POST':
+    name = request.form['userDropdown']
+  exercise = g.conn.execute(text("SELECT * FROM exercise NATURAL JOIN (SELECT eid, speed, Null as sets, Null as reps, Null as weight FROM cardio_exercise UNION SELECT eid, Null as speed, sets, reps, weight FROM strength_exercise) t1 WHERE ename= :nm "),nm=name).fetchone()
+  context = dict(names=names, exercise = exercise)
+  return render_template("exercises.html", **context)
+
+@app.route('/diets', methods=['GET','POST'])
+def diets():
+  names = g.conn.execute("SELECT dname FROM diet").fetchall()
+  name = names[0][0]
+  if request.method == 'POST':
+    name = request.form['userDropdown']
+  diet = g.conn.execute(text("SELECT fname FROM diet NATURAL JOIN consists_of NATURAL JOIN food WHERE dname = :nm "),nm=name).fetchall()
+  calories = g.conn.execute(text("SELECT SUM(calories) AS num FROM diet NATURAL JOIN consists_of NATURAL JOIN food GROUP BY dname HAVING dname = :nm "),nm=name).fetchone()
+  context = dict(names=names, diet = diet,calories = calories)
+  return render_template("diets.html", **context)
 
 @app.route('/competitions')
 def competitions():
@@ -190,6 +207,9 @@ def userProfile():
 
 
   return render_template("userProfile.html", **context)
+
+
+
 
 
 

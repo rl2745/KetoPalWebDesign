@@ -1,0 +1,52 @@
+<html>
+  <style>
+    body{ 
+      font-size: 15pt;
+      font-family: arial;
+    }
+  </style>
+
+
+<body>
+  <h1>KetoPal Diets</h1>
+
+<form method="POST" action="/create_diet">
+<p>Create New Diet: <input type="text" name="name"> <input type="submit" value="Create"></p>
+</form>
+
+<form name="userDropdown" action="/diets" method='POST'>
+  <select name="userDropdown">
+  {% for n in names %}
+    <option value= "{{n.dname}}">{{n.dname}}</option>
+  {% endfor %}
+  </select>
+  <button type="submit">Go</button>
+</form>
+
+
+  <div>
+    {% for foodname in diet %}
+    <div>{{foodname.fname}}</div>
+    {% endfor %}
+  </div>
+
+<table id="diet data">
+  
+	<colgroup>
+		<col class="col-1">
+		<col class="col-2">
+	</colgroup>
+
+	<tbody>
+		<tr>
+			<td class="col-1">Total Calories</td>
+			<td class="col-2">{{calories.num}}</td>
+		</tr>
+	</tbody>
+
+</table>
+
+  </body>
+
+
+</html>
