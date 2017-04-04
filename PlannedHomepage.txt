@@ -5,16 +5,14 @@ KETOPAL
 SHOW DATA 
 
 
-View Foods --> new page
+View Foods --> new page GOOD
 
-View Exercises --> new page
+View Exercises --> new page GOOD
 
 View Competitions --> new page
 
-Create Diet 
+Create Diet
 
 Create Workout Program
 
-Create Competition
-
-View User and associated diet, workout program, competition, etc.
+View User and associated diet, workout program, competition, etc. GOOD
