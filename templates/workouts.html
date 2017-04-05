@@ -8,18 +8,18 @@
 
 
 <body>
-  <h1>KetoPal Diets</h1>
+  <h1>KetoPal Workouts</h1>
 
-<form name="userDropdown" action="/diets" method='POST'>
+<form name="userDropdown" action="/workouts" method='POST'>
   <select name="userDropdown">
   {% for n in names %}
-    <option value= "{{n.dname}}">{{n.dname}}</option>
+    <option value= "{{n.wname}}">{{n.wname}}</option>
   {% endfor %}
   </select>
   <button type="submit">Go</button>
 </form>
 
-<table id="diet data">
+<table id="Workout data">
   
 	<colgroup>
 		<col class="col-1">
@@ -28,11 +28,11 @@
 
 	<tbody>
 
-    {% for foodname in diet %}
+    {% for exercisename in workout %}
 
     <tr>
-      <td class="col-1">{{foodname.fname}}</td>
-      <td class="col-2">{{foodname.calories}}</td>
+      <td class="col-1">{{exercisename.ename}}</td>
+      <td class="col-2">{{exercisename.cal_expend_per_lb}} cal/lb</td>
     </tr>
     {% endfor %}
 
@@ -42,8 +42,8 @@
     </tr>
 
 		<tr>
-			<td class="col-1">Total Calories</td>
-			<td class="col-2">{{calories.num}}</td>
+			<td class="col-1">Total Calories/lb</td>
+			<td class="col-2">{{tcal.num}} cal/lb</td>
 		</tr>
 	</tbody>
 

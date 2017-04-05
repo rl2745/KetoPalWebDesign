@@ -203,6 +203,17 @@ def createDiet():
   context = dict(names=names, diet = diet, calories = calories)
   return render_template("newDiet.html", **context)
 
+@app.route('/workouts', methods=['GET','POST'])
+def workouts():
+  names = g.conn.execute("SELECT wname FROM workout_program").fetchall()
+  name = names[0][0]
+  if request.method == 'POST':
+    name = request.form['userDropdown']
+  workout = g.conn.execute(text("SELECT ename, cal_expend_per_lb FROM exercise NATURAL JOIN uses NATURAL JOIN workout_program WHERE wname = :nm "),nm=name).fetchall()
+  tcal = g.conn.execute(text("SELECT SUM(cal_expend_per_lb) AS num FROM exercise NATURAL JOIN uses NATURAL JOIN workout_program GROUP BY wname HAVING wname = :nm "),nm=name).fetchone()
+  context = dict(names=names, workout = workout, tcal=tcal)
+  return render_template("workouts.html", **context)
+
 @app.route('/competitions', methods=['GET','POST'])
 def competitions():
   comps = g.conn.execute("SELECT DISTINCT cname FROM competition").fetchall()
