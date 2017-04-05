@@ -1,5 +1,9 @@
 #!/usr/bin/env python2.7
 
+#Created by Michael Sheng(ms4973) and Richard Lopez(rl2745)
+#Date Created - April 5, 2017
+#COMS W4111
+
 """
 Columbia's COMS W4111.001 Introduction to Databases
 Example Webserver
@@ -148,17 +152,6 @@ def index():
   #
   return render_template("index.html", **context)
 
-#
-# This is an example of a different path.  You can see it at:
-# 
-#     localhost:8111/another
-#
-# Notice that the function name is another() rather than index()
-# The functions for each app.route need to have different names
-#
-# @app.route('/another')
-# def another():
-#   return render_template("another.html")
 
 @app.route('/foods', methods=['GET','POST'])
 def foods():
@@ -265,26 +258,6 @@ def userProfile():
 
   return render_template("userProfile.html", **context)
 
-
-
-
-
-
-# # Example of adding new data to the database
-# @app.route('/add', methods=['POST'])
-# def add():
-#   # name = request.form['name']
-#   # g.conn.execute(text("INSERT INTO test(name) VALUES ( :nm )"),nm=name)
-#   # return redirect('/')
-
-# # Example of getting table data from the database
-# @app.route('/getUserData', methods=['GET'])
-# def getUserData():
-#   #print request.args
-#   #userProfile = "Jacob Fitzgerald"
-#   userProfile = request.form['userDropDown']
-#   userData = g.conn.execute(text("SELECT * FROM Person WHERE pname = :up "), up=userProfile)
-#   return redirect('/userProfile')
 
 @app.route('/login')
 def login():
