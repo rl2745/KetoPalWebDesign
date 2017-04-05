@@ -10,10 +10,6 @@
 <body>
   <h1>KetoPal Diets</h1>
 
-<form method="POST" action="/create_diet">
-<p>Create New Diet: <input type="text" name="name"> <input type="submit" value="Create"></p>
-</form>
-
 <form name="userDropdown" action="/diets" method='POST'>
   <select name="userDropdown">
   {% for n in names %}
