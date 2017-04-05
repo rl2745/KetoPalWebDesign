@@ -195,16 +195,19 @@ def diets():
 @app.route('/newDiet', methods=['GET','POST'])
 def newDiet():
   foods = g.conn.execute("SELECT fname FROM food").fetchall()
-  food = foods[0][0]
   if request.method == 'POST':
-    food = request.form.getlist('food')
-    dname = request.form['name']
-    #g.conn.execute(text("INSERT INTO diet(name) VALUES ( :nm )"),nm=name)
+    foodsToAdd = request.form.getlist('food')
+    print foodsToAdd
+    dname = str(request.form['name'])
+    print dname
+    did = g.conn.execute("SELECT MAX(did) FROM diet").fetchone()[0] + 1
+    g.conn.execute(text("INSERT INTO diet VALUES ( :di , :nm )"),di=did,nm=dname)
+
+    for food in foodsToAdd:
+      fid = g.conn.execute(text("SELECT fid FROM food WHERE fname = :fn "),fn=food).fetchone()[0]
+      g.conn.execute(text("INSERT INTO consists_of VALUES ( :di , :fi )"),di=did,fi=fid)
+
     return redirect('/diets')
-  food = g.conn.execute(text("SELECT * FROM food WHERE fname= :fd "),fd=food).fetchone()
-
-
-
   context = dict(foods=foods, newDiet = newDiet)
   return render_template("newDiet.html", **context)
 
@@ -218,6 +221,25 @@ def workouts():
   tcal = g.conn.execute(text("SELECT SUM(cal_expend_per_lb) AS num FROM exercise NATURAL JOIN uses NATURAL JOIN workout_program GROUP BY wname HAVING wname = :nm "),nm=name).fetchone()
   context = dict(name=name, names=names, workout = workout, tcal=tcal)
   return render_template("workouts.html", **context)
+
+@app.route('/newWorkout', methods=['GET','POST'])
+def newWorkout():
+  exercises = g.conn.execute("SELECT ename FROM exercise").fetchall()
+  if request.method == 'POST':
+    exercisesToAdd = request.form.getlist('exercise')
+    print exercisesToAdd
+    wname = str(request.form['name'])
+    print wname
+    wid = g.conn.execute("SELECT MAX(wid) FROM workout_program").fetchone()[0] + 1
+    g.conn.execute(text("INSERT INTO workout_program VALUES ( :wi , :nm )"),wi=wid,nm=wname)
+
+    for exercise in exercisesToAdd:
+      eid = g.conn.execute(text("SELECT eid FROM exercise WHERE ename = :en "),en=exercise).fetchone()[0]
+      g.conn.execute(text("INSERT INTO uses VALUES ( :wi , :ei )"),wi=wid,ei=eid)
+
+    return redirect('/workouts')
+  context = dict(exercises=exercises, newWorkout = newWorkout)
+  return render_template("newWorkout.html", **context)
 
 @app.route('/competitions', methods=['GET','POST'])
 def competitions():
