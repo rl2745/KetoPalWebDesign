@@ -189,7 +189,7 @@ def diets():
     name = request.form['userDropdown']
   diet = g.conn.execute(text("SELECT fname, calories FROM diet NATURAL JOIN consists_of NATURAL JOIN food WHERE dname = :nm "),nm=name).fetchall()
   calories = g.conn.execute(text("SELECT SUM(calories) AS num FROM diet NATURAL JOIN consists_of NATURAL JOIN food GROUP BY dname HAVING dname = :nm "),nm=name).fetchone()
-  context = dict(names=names, diet = diet, calories = calories)
+  context = dict(name=name, names=names, diet = diet, calories = calories)
   return render_template("diets.html", **context)
 
 @app.route('/newDiet', methods=['GET','POST'])
@@ -210,7 +210,7 @@ def workouts():
     name = request.form['userDropdown']
   workout = g.conn.execute(text("SELECT ename, cal_expend_per_lb FROM exercise NATURAL JOIN uses NATURAL JOIN workout_program WHERE wname = :nm "),nm=name).fetchall()
   tcal = g.conn.execute(text("SELECT SUM(cal_expend_per_lb) AS num FROM exercise NATURAL JOIN uses NATURAL JOIN workout_program GROUP BY wname HAVING wname = :nm "),nm=name).fetchone()
-  context = dict(names=names, workout = workout, tcal=tcal)
+  context = dict(name=name, names=names, workout = workout, tcal=tcal)
   return render_template("workouts.html", **context)
 
 @app.route('/competitions', methods=['GET','POST'])
