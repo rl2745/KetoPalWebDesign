@@ -197,8 +197,16 @@ def newDiet():
   foods = g.conn.execute("SELECT fname FROM food").fetchall()
   food = foods[0][0]
   if request.method == 'POST':
-    food = request.form['foodsChecklist']
+    food = request.form.getlist('food')
+    dname = request.form['name']
+    print(food)
+    print(dname)
+    #g.conn.execute(text("INSERT INTO diet(name) VALUES ( :nm )"),nm=name)
+    return redirect('/diets')
   food = g.conn.execute(text("SELECT * FROM food WHERE fname= :fd "),fd=food).fetchone()
+
+
+
   context = dict(foods=foods, newDiet = newDiet)
   return render_template("newDiet.html", **context)
 
