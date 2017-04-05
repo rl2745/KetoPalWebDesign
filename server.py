@@ -187,9 +187,9 @@ def diets():
   name = names[0][0]
   if request.method == 'POST':
     name = request.form['userDropdown']
-  diet = g.conn.execute(text("SELECT fname FROM diet NATURAL JOIN consists_of NATURAL JOIN food WHERE dname = :nm "),nm=name).fetchall()
+  diet = g.conn.execute(text("SELECT fname, calories FROM diet NATURAL JOIN consists_of NATURAL JOIN food WHERE dname = :nm "),nm=name).fetchall()
   calories = g.conn.execute(text("SELECT SUM(calories) AS num FROM diet NATURAL JOIN consists_of NATURAL JOIN food GROUP BY dname HAVING dname = :nm "),nm=name).fetchone()
-  context = dict(names=names, diet = diet,calories = calories)
+  context = dict(names=names, diet = diet, calories = calories)
   return render_template("diets.html", **context)
 
 @app.route('/competitions', methods=['GET','POST'])
@@ -200,7 +200,7 @@ def competitions():
     comp = request.form['userDropdown']
   competition = g.conn.execute(text("SELECT * FROM ((SELECT C.cid, C.win_condition, P.email, C.cname, C.start, C.stop FROM competition C JOIN participates P ON C.cid=P.cid) T1 NATURAL JOIN person) WHERE cname= :cp "),cp=comp).fetchone()
   competitorsCursor = g.conn.execute(text("SELECT * FROM ((SELECT C.cid, C.win_condition, P.email, C.cname, C.start, C.stop FROM competition C JOIN participates P ON C.cid=P.cid) T1 NATURAL JOIN person) WHERE cname= :cp "),cp=comp).fetchall()
-  context = dict(comps=comps, competition=competition)
+  context = dict(comps=comps, competition=competition, competitorsCursor=competitorsCursor)
 
   return render_template("competitions.html", **context)
 

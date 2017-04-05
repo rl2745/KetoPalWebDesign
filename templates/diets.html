@@ -23,13 +23,6 @@
   <button type="submit">Go</button>
 </form>
 
-
-  <div>
-    {% for foodname in diet %}
-    <div>{{foodname.fname}}</div>
-    {% endfor %}
-  </div>
-
 <table id="diet data">
   
 	<colgroup>
@@ -38,6 +31,20 @@
 	</colgroup>
 
 	<tbody>
+
+    {% for foodname in diet %}
+
+    <tr>
+      <td class="col-1">{{foodname.fname}}</td>
+      <td class="col-2">{{foodname.calories}}</td>
+    </tr>
+    {% endfor %}
+
+    <tr>
+      <td class="col-1">&nbsp;</td>
+      <td class="col-2">&nbsp;</td>
+    </tr>
+
 		<tr>
 			<td class="col-1">Total Calories</td>
 			<td class="col-2">{{calories.num}}</td>
@@ -45,6 +52,8 @@
 	</tbody>
 
 </table>
+
+<p><a href="/">Back to Homepage</a></p>
 
   </body>
 
