@@ -8,8 +8,10 @@
 
 
 <body>
-  <h1>Create Diet</h1>
 
+<h1>Create Diet</h1>
+
+<h3>Select Foods for the New Diet</h3>
 
 <form name="foodsChecklist" method="POST" action="/newDiet">
 	{% for f in foods %}
@@ -18,7 +20,7 @@
 
 	<br></br>
 
-	<p>Create New Diet: <input type="text" name="name"> <input type="submit" value="Create"></p>
+	<p>New Diet Name: <input type="text" name="name"> <input type="submit" value="Create"></p>
 </form>	
 
 
