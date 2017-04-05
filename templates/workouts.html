@@ -1,0 +1,57 @@
+<html>
+  <style>
+    body{ 
+      font-size: 15pt;
+      font-family: arial;
+    }
+  </style>
+
+
+<body>
+  <h1>KetoPal Workouts</h1>
+
+<form name="userDropdown" action="/workouts" method='POST'>
+  <select name="userDropdown">
+  {% for n in names %}
+    <option value= "{{n.wname}}">{{n.wname}}</option>
+  {% endfor %}
+  </select>
+  <button type="submit">Go</button>
+</form>
+
+<table id="Workout data">
+  
+	<colgroup>
+		<col class="col-1">
+		<col class="col-2">
+	</colgroup>
+
+	<tbody>
+
+    {% for exercisename in workout %}
+
+    <tr>
+      <td class="col-1">{{exercisename.ename}}</td>
+      <td class="col-2">{{exercisename.cal_expend_per_lb}} cal/lb</td>
+    </tr>
+    {% endfor %}
+
+    <tr>
+      <td class="col-1">&nbsp;</td>
+      <td class="col-2">&nbsp;</td>
+    </tr>
+
+		<tr>
+			<td class="col-1">Total Calories/lb</td>
+			<td class="col-2">{{tcal.num}} cal/lb</td>
+		</tr>
+	</tbody>
+
+</table>
+
+<p><a href="/">Back to Homepage</a></p>
+
+  </body>
+
+
+</html>
