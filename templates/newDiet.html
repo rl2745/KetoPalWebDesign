@@ -8,11 +8,19 @@
 
 
 <body>
-  <h1>KetoPal Diets</h1>
+  <h1>Create Diet</h1>
 
-<form method="POST" action="/create_diet">
-<p>Create New Diet: <input type="text" name="name"> <input type="submit" value="Create"></p>
+
+<form name="foodsChecklist" method="POST" action="/create_diet">
+	{% for f in foods %}
+		<input type="checkbox" name="food" value="{{f.fname}}">{{f.fname}}<br>
+	{% endfor %}
+
+	<br></br>
+	<p>Create New Diet: <input type="text" name="name"> <input type="submit" value="Create"></p>
 </form>
+
+
 
 <p><a href="/">Back to Homepage</a></p>
 
