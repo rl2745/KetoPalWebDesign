@@ -190,9 +190,7 @@ def newDiet():
   foods = g.conn.execute("SELECT fname FROM food").fetchall()
   if request.method == 'POST':
     foodsToAdd = request.form.getlist('food')
-    print foodsToAdd
     dname = str(request.form['name'])
-    print dname
     did = g.conn.execute("SELECT MAX(did) FROM diet").fetchone()[0] + 1
     g.conn.execute(text("INSERT INTO diet VALUES ( :di , :nm )"),di=did,nm=dname)
 
@@ -220,9 +218,7 @@ def newWorkout():
   exercises = g.conn.execute("SELECT ename FROM exercise").fetchall()
   if request.method == 'POST':
     exercisesToAdd = request.form.getlist('exercise')
-    print exercisesToAdd
     wname = str(request.form['name'])
-    print wname
     wid = g.conn.execute("SELECT MAX(wid) FROM workout_program").fetchone()[0] + 1
     g.conn.execute(text("INSERT INTO workout_program VALUES ( :wi , :nm )"),wi=wid,nm=wname)
 
